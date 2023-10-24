@@ -1,16 +1,31 @@
+import os
+import re
 from pathlib import Path
 from setuptools import setup, find_packages
 
 
+ROOT = os.path.dirname(__file__)
+VERSION_RE = re.compile(r"""__version__ = ['"]([0-9.]+)['"]""")
+
+
+def get_version():
+    init_path = os.path.join(ROOT, "src", "pytest_stepfunctions", "__init__.py")
+    print(init_path)
+    init = open(init_path).read()
+    print(f"{init=}")
+    return VERSION_RE.search(init).group(1)
+
+
 setup(
     name="pytest-stepfunctions",
-    author="Che-Hsun Liu",
-    author_email="chehsunliu@gmail.com",
-    description="A small description",
+    version=get_version(),
+    author="Che-Hsun Liu & Bus Patrol Inc",
+    author_email="support@buspatrol.com",
+    description="A package for executing local modules in the AWS Stepfunction Docker container",
     long_description=Path("./README.md").read_text(),
     long_description_content_type="text/markdown",
     license="MIT",
-    url="https://github.com/chehsunliu/pytest-stepfunctions",
+    url="https://github.com/buspatrol/pytest-stepfunctions",
     setup_requires=["setuptools_scm"],
     use_scm_version=True,
     packages=find_packages("src"),
