@@ -2,18 +2,21 @@ import os
 import re
 from pathlib import Path
 from setuptools import setup, find_packages
+from typing import Any
 
 
 ROOT = os.path.dirname(__file__)
 VERSION_RE = re.compile(r"""__version__ = ['"]([0-9.]+)['"]""")
 
 
-def get_version():
+def get_version() -> str:
     init_path = os.path.join(ROOT, "src", "pytest_stepfunctions", "__init__.py")
     print(init_path)
     init = open(init_path).read()
     print(f"{init=}")
-    return VERSION_RE.search(init).group(1)
+    version_value = re.search(VERSION_RE, init)
+    assert version_value is not None
+    return version_value.group(1)
 
 
 setup(
@@ -38,11 +41,11 @@ setup(
         "Intended Audience :: Developers",
         "Development Status :: 4 - Beta",
         "Framework :: Pytest",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Software Development :: Quality Assurance",
         "Topic :: Software Development :: Testing",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.9",
 )
