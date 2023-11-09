@@ -9,7 +9,7 @@ ROOT = os.path.dirname(__file__)
 VERSION_RE = re.compile(r"""__version__ = ['"]([0-9.]+)['"]""")
 
 
-def get_version() -> Any:
+def get_version() -> str:
     init_path = os.path.join(ROOT, "src", "pytest_stepfunctions", "__init__.py")
     print(init_path)
     init = open(init_path).read()
