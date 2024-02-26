@@ -18,6 +18,9 @@ class LambdaContext:
     )
     aws_request_id: str = "da658bd3-2d6f-4e7b-8ec2-937234644fdc"
 
+    def get_remaining_time_in_millis(self) -> int:
+        return 5
+
 
 class AWSLambdaRequestHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
